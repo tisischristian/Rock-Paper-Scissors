@@ -10,13 +10,12 @@ function getComputerChoice(choice) {
 
 // GET USER CHOICE
 function getUserChoice() {
+    let userChoice = prompt("Enter User Choice: ");
     if (userChoice === null) {
-    console.log("Game cancelled.");
-    return;
-   }
-   
-   let userChoice = prompt("Enter User Choice: ");
-   return userChoice;
+        console.log("Game cancelled.");
+        return null;
+    }
+    return userChoice.toLowerCase();
 }
 // console.log(getUserChoice());
 
@@ -65,9 +64,12 @@ function playRound(humanChoice, computerChoice) {
 // IF USER CHOICE IS ROCK AND COMPUTER CHOICE IS SCISSORS
 function playGame() {
     while (humanScore < 5 && computerScore < 5) {
-        console.log(playRound(getUserChoice(), getComputerChoice(choice)));
+        let humanChoice = getUserChoice();
+        if (humanChoice === null) {
+            break;
+        }
+        console.log(playRound(humanChoice, getComputerChoice(choice)));
     }
-
     if (humanScore === 5) {
         console.log("Congratulations! You won the game!");
     } else if (computerScore === 5) {
